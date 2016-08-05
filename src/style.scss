@@ -12,6 +12,34 @@ body {
   flex-direction: column;
 }
 
+.post {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  width: 600px;
+  height: 120px;
+  border: 3px solid #cccccc;
+  padding: 5px;
+  font-family: Tahoma, sans-serif;
+}
+
+.newPost {
+  display: flex;
+  flex-direction: column;
+  input {
+    // padding-top: 10px;
+    // padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.showTitle {
+
+}
+
 nav {
   display: flex;
   align-items: center;

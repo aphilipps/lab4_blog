@@ -51,14 +51,11 @@ class New extends Component {
   render() {
     return (
       <div>
-        <form>
+        <form className="newPost">
           <input type="text" value={this.state.title} name="Title" placeholder="New Post Title" onChange={this.onTitleChange} />
-          <br />
           <input type="text" value={this.state.tags} name="Title" placeholder="New Post Tags" onChange={this.onTagsChange} />
-          <br />
           <input type="text" value={this.state.content} name="Title" placeholder="New Post Content" onChange={this.onContentChange} />
-          <br />
-          <button type="submit" onClick={this.onClick}>Click Me!</button>
+          <button type="submit" onClick={this.onClick}>Create Post</button>
         </form>
       </div>
     );

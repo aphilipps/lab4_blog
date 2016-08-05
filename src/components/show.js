@@ -14,19 +14,30 @@ class Show extends Component {
 
     // init component state here
     this.state = {
-      isEditing: false,
-      editingTitle: false,
+      editing: false,
+      title: '',
+      tags: '',
       content: '',
     };
     this.onDeleteClick = this.onDeleteClick.bind(this);
-    this.changeEdit = this.changeEdit.bind(this);
+    this.changeContent = this.changeContent.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchpost(this.props.params.id);
   }
 
-  onTextChange(event) {
+  onTitleChange(event) {
+    this.setState({ title: event.target.value });
+    console.log(this.state.title);
+  }
+
+  onTagsChange(event) {
+    this.setState({ tags: event.target.value });
+    console.log(this.state.tags);
+  }
+
+  onContentChange(event) {
     this.setState({ content: event.target.value });
     console.log(this.state.content);
   }
@@ -35,36 +46,69 @@ class Show extends Component {
     this.props.deletePost(this.props.params.id);
   }
 
-  editMode() {
-    if (this.state.isEditing) {
-      return <Textarea onChange={text => this.onTextChange(text)} value={this.state.content} />;
+  editTitle() {
+    if (this.state.editing) {
+      return <Textarea className="content" onChange={text => this.onTitleChange(text)} value={this.state.title} />;
+    } else {
+      return <h1 dangerouslySetInnerHTML={{ __html: marked(this.props.currentPost.title || '') }} />;
+    }
+  }
+  editTags() {
+    if (this.state.editing) {
+      return <Textarea className="content" onChange={text => this.onTagsChange(text)} value={this.state.tags} />;
+    } else {
+      return <h3 dangerouslySetInnerHTML={{ __html: marked(this.props.currentPost.tags || '') }} />;
+    }
+  }
+
+  editContent() {
+    if (this.state.editing) {
+      return <Textarea className="content" onChange={text => this.onContentChange(text)} value={this.state.content} />;
     } else {
       return <div dangerouslySetInnerHTML={{ __html: marked(this.props.currentPost.content || '') }} />;
     }
   }
 
-  editSymbol() {
-    if (this.state.isEditing) {
-      return <i className="fa fa-check" onClick={this.changeEdit} aria-hidden="true"></i>;
-    } else {
-      return <i className="fa fa-pencil" onClick={this.changeEdit} aria-hidden="true"></i>;
-    }
-  }
-
-  changeEdit(event) {
-    if (this.state.isEditing) {
+  changeContent(event) {
+    if (this.state.editing) {
       this.props.updatePost(this.props.params.id, this.state.title, this.state.tags, this.state.content);
       console.log('updating post');
       // this.props.fetchpost(this.props.params.id);
     } else {
       this.setState({
+        title: this.props.currentPost.title,
+        tags: this.props.currentPost.tags,
         content: this.props.currentPost.content,
       });
     }
 
     this.setState({
-      isEditing: !this.state.isEditing,
+      editing: !this.state.editing,
     });
+  }
+
+  // changeTitle(event) {
+  //   if (this.state.editingTitle) {
+  //     this.props.updatePost(this.props.params.id, this.state.title, this.state.tags, this.state.content);
+  //     console.log('updating post');
+  //     // this.props.fetchpost(this.props.params.id);
+  //   } else {
+  //     this.setState({
+  //       content: this.props.currentPost.content,
+  //     });
+  //   }
+  //
+  //   this.setState({
+  //     editingContent: !this.state.editingContent,
+  //   });
+  // }
+
+  editSymbol() {
+    if (this.state.editing) {
+      return <i className="fa fa-check" onClick={this.changeContent} aria-hidden="true"></i>;
+    } else {
+      return <i className="fa fa-pencil" onClick={this.changeContent} aria-hidden="true"></i>;
+    }
   }
 
   render() {
@@ -74,12 +118,12 @@ class Show extends Component {
       );
     } else {
       return (
-        <div>
-          <h1>{this.props.currentPost.title}</h1>
-          <h3>Tags: {this.props.currentPost.tags}</h3>
+        <div className="post">
+          {this.editTitle()}
+          {this.editTags()}
           <i className="fa fa-trash-o" onClick={this.onDeleteClick} aria-hidden="true"></i>
           {this.editSymbol()}
-          {this.editMode()}
+          {this.editContent()}
         </div>
       );
     }
