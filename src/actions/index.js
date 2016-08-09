@@ -9,8 +9,8 @@ export const ActionTypes = {
   UPDATE_POST: 'UPDATE_POST',
 };
 
-// const ROOT_URL = 'https://lab5-mongodb.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'https://lab5-mongodb.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 const API_KEY = '?key=a_philipps';
 
 
@@ -21,7 +21,6 @@ export function fetchposts() {
       // do something with response.data  (some json)
         dispatch({ type: 'FETCH_POSTS', payload: response.data });
       }).catch(error => {
-        // alert('I am an alert box!');
       // hit an error do something else!
       });
     }
