@@ -8,6 +8,17 @@ import marked from 'marked';
 // import Welcome from './welcome';
 
 // example class based component (smart component)
+
+function replaceComma(tags) {
+  if (tags) {
+    const tagString = tags.toString();
+    const change = tagString.replace(',', ' ');
+
+    return change;
+  }
+  return '';
+}
+
 class Show extends Component {
   constructor(props) {
     super(props);
@@ -25,17 +36,6 @@ class Show extends Component {
 
   componentWillMount() {
     this.props.fetchpost(this.props.params.id);
-    if (this.props.currentPost != null) {
-      console.log('converting initial tags');
-      const tagString = this.props.currentPost.tags.toString();
-      console.log(tagString);
-      const useableTag = tagString.replace(/,/g, ' ');
-      console.log(useableTag);
-      this.setState({
-        tags: useableTag,
-      });
-      console.log(this.state.tags);
-    }
   }
 
   onTitleChange(event) {
@@ -44,8 +44,8 @@ class Show extends Component {
   }
 
   onTagsChange(event) {
-    this.setState({ tags: event.target.value });
-    console.log(this.state.tags);
+    const tagArray = event.target.value.split(' ');
+    this.setState({ tags: tagArray });
   }
 
   onContentChange(event) {
@@ -65,16 +65,10 @@ class Show extends Component {
     }
   }
   editTags() {
-    // let tagString = this.props.currentPost.tags.toString();
-    // const change = tagString.replace(',', ' ');
-    // this.setState({
-    //   tags: change,
-    // });
-
     if (this.state.editing) {
-      return <Textarea className="content" onChange={text => this.onTagsChange(text)} value={this.state.tags} />;
+      return <Textarea className="content" onChange={text => this.onTagsChange(text)} value={replaceComma(this.state.tags)} />;
     } else {
-      return <h3> {this.state.tags} </h3>;
+      return <h3> {replaceComma(this.props.currentPost.tags)} </h3>;
     }
   }
 
@@ -86,29 +80,15 @@ class Show extends Component {
     }
   }
 
-  // replaceComma(tagString) {
-  //   const change = tagString.replace(',', ' ');
-  //
-  //   return change;
-  // }
-
   changeContent(event) {
     if (this.state.editing) {
-      let tagArray = [];
-      if (this.state.tags) {
-        tagArray = this.state.tags.split(' ');
-        console.log(tagArray);
-      } else {
-        tagArray = '';
-      }
-
-      this.props.updatePost(this.props.params.id, this.state.title, tagArray, this.state.content);
+      this.props.updatePost(this.props.params.id, this.state.title, this.state.tags, this.state.content);
       console.log('updating post');
       // this.props.fetchpost(this.props.params.id);
     } else {
       this.setState({
         title: this.props.currentPost.title,
-        tags: this.props.currentPost.tags.toString().replace(/,/g, ' '),
+        tags: this.props.currentPost.tags,
         content: this.props.currentPost.content,
       });
     }
@@ -120,9 +100,9 @@ class Show extends Component {
 
   editSymbol() {
     if (this.state.editing) {
-      return <i className="fa fa-check" onClick={this.changeContent} aria-hidden="true"></i>;
+      return <button type="button" className="delete" onClick={this.changeContent}>Finished</button>;
     } else {
-      return <i className="fa fa-pencil" onClick={this.changeContent} aria-hidden="true"></i>;
+      return <button type="button" className="delete" onClick={this.changeContent}>Edit Post</button>;
     }
   }
 
@@ -136,7 +116,7 @@ class Show extends Component {
         <div className="post">
           {this.editTitle()}
           {this.editTags()}
-          <i className="fa fa-trash-o" onClick={this.onDeleteClick} aria-hidden="true"></i>
+          <button type="button" className="delete" onClick={this.onDeleteClick}>Delete Post</button>
           {this.editSymbol()}
           {this.editContent()}
         </div>

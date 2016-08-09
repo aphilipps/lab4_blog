@@ -15,6 +15,10 @@ body {
 .post {
   display: flex;
   flex-direction: column;
+
+  .delete {
+    width: 60px;
+  }
 }
 
 .content {
