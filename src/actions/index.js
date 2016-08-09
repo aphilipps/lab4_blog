@@ -9,7 +9,7 @@ export const ActionTypes = {
   UPDATE_POST: 'UPDATE_POST',
 };
 
-const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
+const ROOT_URL = 'https://lab5-mongodb.herokuapp.com/api';
 const API_KEY = '?key=a_philipps';
 
 
