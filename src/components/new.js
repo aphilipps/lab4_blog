@@ -41,7 +41,8 @@ class New extends Component {
   onClick(event) {
     event.preventDefault();
     event.stopPropagation();
-    this.props.createPost(this.state.title, this.state.tags, this.state.content);
+    const tagArray = this.state.tags.split(' ');
+    this.props.createPost(this.state.title, tagArray, this.state.content);
     // this.props.onCreateNoteClick(this.state.noteTitle);
     this.setState({ title: '' });
     this.setState({ tags: '' });

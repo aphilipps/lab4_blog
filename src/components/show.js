@@ -25,6 +25,17 @@ class Show extends Component {
 
   componentWillMount() {
     this.props.fetchpost(this.props.params.id);
+    if (this.props.currentPost != null) {
+      console.log('converting initial tags');
+      const tagString = this.props.currentPost.tags.toString();
+      console.log(tagString);
+      const useableTag = tagString.replace(/,/g, ' ');
+      console.log(useableTag);
+      this.setState({
+        tags: useableTag,
+      });
+      console.log(this.state.tags);
+    }
   }
 
   onTitleChange(event) {
@@ -54,10 +65,16 @@ class Show extends Component {
     }
   }
   editTags() {
+    // let tagString = this.props.currentPost.tags.toString();
+    // const change = tagString.replace(',', ' ');
+    // this.setState({
+    //   tags: change,
+    // });
+
     if (this.state.editing) {
       return <Textarea className="content" onChange={text => this.onTagsChange(text)} value={this.state.tags} />;
     } else {
-      return <h3 dangerouslySetInnerHTML={{ __html: marked(this.props.currentPost.tags || '') }} />;
+      return <h3> {this.state.tags} </h3>;
     }
   }
 
@@ -69,15 +86,29 @@ class Show extends Component {
     }
   }
 
+  // replaceComma(tagString) {
+  //   const change = tagString.replace(',', ' ');
+  //
+  //   return change;
+  // }
+
   changeContent(event) {
     if (this.state.editing) {
-      this.props.updatePost(this.props.params.id, this.state.title, this.state.tags, this.state.content);
+      let tagArray = [];
+      if (this.state.tags) {
+        tagArray = this.state.tags.split(' ');
+        console.log(tagArray);
+      } else {
+        tagArray = '';
+      }
+
+      this.props.updatePost(this.props.params.id, this.state.title, tagArray, this.state.content);
       console.log('updating post');
       // this.props.fetchpost(this.props.params.id);
     } else {
       this.setState({
         title: this.props.currentPost.title,
-        tags: this.props.currentPost.tags,
+        tags: this.props.currentPost.tags.toString().replace(/,/g, ' '),
         content: this.props.currentPost.content,
       });
     }
@@ -86,22 +117,6 @@ class Show extends Component {
       editing: !this.state.editing,
     });
   }
-
-  // changeTitle(event) {
-  //   if (this.state.editingTitle) {
-  //     this.props.updatePost(this.props.params.id, this.state.title, this.state.tags, this.state.content);
-  //     console.log('updating post');
-  //     // this.props.fetchpost(this.props.params.id);
-  //   } else {
-  //     this.setState({
-  //       content: this.props.currentPost.content,
-  //     });
-  //   }
-  //
-  //   this.setState({
-  //     editingContent: !this.state.editingContent,
-  //   });
-  // }
 
   editSymbol() {
     if (this.state.editing) {
