@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import NavBar from './navbar';
 
 // import Welcome from './welcome';
 
@@ -15,10 +15,7 @@ class App extends Component {
   render() {
     return (
       <div id="base">
-        <nav id="nav">
-          <span><Link to="/" className="navitem" >My Blog</Link> </span>
-          <span className="navitem"><Link to="posts/new">New post</Link></span>
-        </nav>
+        <NavBar />
         {this.props.children}
       </div>
     );

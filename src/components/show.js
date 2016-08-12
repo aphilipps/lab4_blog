@@ -115,6 +115,7 @@ class Show extends Component {
       return (
         <div className="post">
           {this.editTitle()}
+          Author: {this.props.currentPost.author}
           {this.editTags()}
           <button type="button" className="delete" onClick={this.onDeleteClick}>Delete Post</button>
           {this.editSymbol()}
