@@ -13,8 +13,10 @@ export const ActionTypes = {
 };
 
 // const ROOT_URL = 'https://lab5-mongodb.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
-const API_KEY = '?key=a_philipps';
+const ROOT_URL = 'https://lab5-mongodbpt2.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
+// const API_KEY = '?key=a_philipps';
+const API_KEY = '';
 
 
 export function fetchposts() {

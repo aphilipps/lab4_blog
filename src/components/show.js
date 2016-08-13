@@ -12,7 +12,7 @@ import marked from 'marked';
 function replaceComma(tags) {
   if (tags) {
     const tagString = tags.toString();
-    const change = tagString.replace(',', ' ');
+    const change = tagString.replace(/,/g, ' ');
 
     return change;
   }
