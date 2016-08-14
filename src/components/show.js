@@ -29,6 +29,7 @@ class Show extends Component {
       title: '',
       tags: '',
       content: '',
+      author: '',
     };
     this.onDeleteClick = this.onDeleteClick.bind(this);
     this.changeContent = this.changeContent.bind(this);
@@ -36,7 +37,17 @@ class Show extends Component {
 
   componentWillMount() {
     this.props.fetchpost(this.props.params.id);
+    console.log(this.props.currentPost);
   }
+
+  // componentWillReceiveProps() {
+  //   this.setState({
+  //     title: this.props.currentPost.title,
+  //     tags: this.props.pcurrentPostost.tags,
+  //     content: this.props.currentPost.content,
+  //     author: this.props.currentPost.author,
+  //   });
+  // }
 
   onTitleChange(event) {
     this.setState({ title: event.target.value });

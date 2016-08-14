@@ -14,7 +14,7 @@ class SignUp extends Component {
     this.state = {
       email: '',
       password: '',
-      name: '',
+      username: '',
     };
 
     this.onEmailChange = this.onEmailChange.bind(this);
@@ -34,18 +34,19 @@ class SignUp extends Component {
   }
 
   onNameChange(event) {
-    this.setState({ name: event.target.value });
-    console.log(this.state.name);
+    this.setState({ username: event.target.value });
+    console.log(this.state.username);
   }
 
   onClick(event) {
+    console.log(this.state.username);
     event.preventDefault();
     event.stopPropagation();
-    this.props.signupUser({ email: this.state.email, password: this.state.password, name: this.state.name });
+    this.props.signupUser({ email: this.state.email, password: this.state.password, username: this.state.username });
     this.setState({
       email: '',
       password: '',
-      name: '',
+      username: '',
     });
   }
 
@@ -55,7 +56,7 @@ class SignUp extends Component {
         <form className="newPost">
           <input type="text" value={this.state.email} name="Title" placeholder="Email" onChange={this.onEmailChange} />
           <input type="text" value={this.state.password} name="Title" placeholder="Password" onChange={this.onPasswordChange} />
-          <input type="text" value={this.state.name} name="Title" placeholder="Name" onChange={this.onNameChange} />
+          <input type="text" value={this.state.username} name="Title" placeholder="Name" onChange={this.onNameChange} />
           <button type="submit" onClick={this.onClick}>Create Account</button>
         </form>
       </div>
