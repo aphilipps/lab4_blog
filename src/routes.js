@@ -8,6 +8,7 @@ import Show from './components/show';
 import RequireAuth from './components/require-auth';
 import SignIn from './components/signin';
 import SignUp from './components/signup';
+import UserList from './components/userlist';
 
 // import Welcome from './components/welcome';
 
@@ -18,5 +19,6 @@ export default(
     <Route path="signup" component={SignUp} />
     <Route path="posts/new" component={RequireAuth(New)} />
     <Route path="posts/:id" component={Show} />
+    <Route path="users" component={UserList} />
   </Route>
 );

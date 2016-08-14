@@ -10,6 +10,7 @@ export const ActionTypes = {
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
+  FETCH_USERS: 'FETCH_USERS',
 };
 
 // const ROOT_URL = 'https://lab5-mongodb.herokuapp.com/api';
@@ -38,7 +39,7 @@ export function fetchpost(id) {
       axios.get(`${ROOT_URL}/posts/${id}/${API_KEY}`).then(response => {
       // do something with response.data  (some json)
         dispatch({ type: 'FETCH_POST', payload: response.data });
-        console.log(response.data);
+        // console.log(response.data);
       }).catch(error => {
       // hit an error do something else!
       });
@@ -82,7 +83,7 @@ export function updatePost(id, title, tags, content) {
       axios.put(`${ROOT_URL}/posts/${id}/${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } }).then(response => {
       // do something with response.data  (some json)
         dispatch({ type: 'UPDATE_POST', payload: response.data });
-        console.log(response.data);
+        // console.log(response.data);
         // browserHistory.push('/');
       }).catch(error => {
       // hit an error do something else!
@@ -106,7 +107,7 @@ export function signinUser({ email, password }) {
       // do something with response.data  (some json)
         dispatch({ type: ActionTypes.AUTH_USER });
         localStorage.setItem('token', response.data.token);
-        console.log(response.data);
+        // console.log(response.data);
       }).catch(error => {
       // hit an error do something else!
         dispatch(authError(`Sign In Failed: ${error.response.data}`));
@@ -131,7 +132,7 @@ export function signupUser({ email, password, username }) {
       // do something with response.data  (some json)
         dispatch({ type: ActionTypes.AUTH_USER });
         localStorage.setItem('token', response.data.token);
-        console.log(response.data);
+        // console.log(response.data);
       }).catch(error => {
       // hit an error do something else!
         dispatch(authError(`Sign In Failed: ${error.response.data}`));
@@ -158,4 +159,17 @@ export function authError(error) {
     type: ActionTypes.AUTH_ERROR,
     message: error,
   };
+}
+
+export function fetchusers() {
+  return (
+    (dispatch) => {
+      axios.get(`${ROOT_URL}/users${API_KEY}`).then(response => {
+      // do something with response.data  (some json)
+        dispatch({ type: 'FETCH_USERS', payload: response.data });
+      }).catch(error => {
+      // hit an error do something else!
+      });
+    }
+  );
 }

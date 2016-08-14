@@ -25,21 +25,21 @@ class SignUp extends Component {
 
   onEmailChange(event) {
     this.setState({ email: event.target.value });
-    console.log(this.state.email);
+    // console.log(this.state.email);
   }
 
   onPasswordChange(event) {
     this.setState({ password: event.target.value });
-    console.log(this.state.password);
+    // console.log(this.state.password);
   }
 
   onNameChange(event) {
     this.setState({ username: event.target.value });
-    console.log(this.state.username);
+    // console.log(this.state.username);
   }
 
   onClick(event) {
-    console.log(this.state.username);
+    // console.log(this.state.username);
     event.preventDefault();
     event.stopPropagation();
     this.props.signupUser({ email: this.state.email, password: this.state.password, username: this.state.username });

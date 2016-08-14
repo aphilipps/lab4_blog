@@ -1,7 +1,8 @@
 body {
   font-family: "Roboto", sans-serif;
   color: rgb(10%, 10%, 10%);
-  background: darken(white, 10%);
+  // background: darken(white, 10%);
+  background: darken(lightblue, 10%);
   margin: 50px;
   a {
       text-decoration: none!important;
@@ -80,4 +81,12 @@ ul {
   li {
     list-style-type: none!important;
   }
+}
+
+.userBox {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0,0,0,0.3);
+  padding: 10px;
+  color: white;
 }

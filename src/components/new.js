@@ -25,17 +25,17 @@ class New extends Component {
 
   onTitleChange(event) {
     this.setState({ title: event.target.value });
-    console.log(this.state.title);
+    // console.log(this.state.title);
   }
 
   onTagsChange(event) {
     this.setState({ tags: event.target.value });
-    console.log(this.state.tags);
+    // console.log(this.state.tags);
   }
 
   onContentChange(event) {
     this.setState({ content: event.target.value });
-    console.log(this.state.content);
+    // console.log(this.state.content);
   }
 
   onClick(event) {

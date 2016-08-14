@@ -14,33 +14,17 @@ class NavBar extends Component {
     this.state = {
 
     };
-
-    // this.onEmailChange = this.onEmailChange.bind(this);
-    // this.onPasswordChange = this.onPasswordChange.bind(this);
-    // this.onClick = this.onClick.bind(this);
   }
-  //
-  // onEmailChange(event) {
-  //   this.setState({ email: event.target.value });
-  //   console.log(this.state.email);
-  // }
-  //
-  // onPasswordChange(event) {
-  //   this.setState({ password: event.target.value });
-  //   console.log(this.state.password);
-  // }
-  //
-  // onClick(event) {
-  //   event.preventDefault();
-  //   event.stopPropagation();
-    // this.props.signinUser(this.state.email, this.state.password);
-  //   this.setState({ email: '' });
-  //   this.setState({ password: '' });
-  // }
+
 
   renderSignOut() {
     if (this.props.authenticated) {
-      return <span onClick={this.props.signoutUser}>Sign Out</span>;
+      return (
+        <div>
+          <span className="navitem"><Link to="users">Users</Link></span>
+          <span className="navitem" onClick={this.props.signoutUser}>Sign Out</span>
+        </div>
+      );
     } else {
       return (
         <div>

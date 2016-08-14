@@ -37,21 +37,11 @@ class Show extends Component {
 
   componentWillMount() {
     this.props.fetchpost(this.props.params.id);
-    console.log(this.props.currentPost);
   }
-
-  // componentWillReceiveProps() {
-  //   this.setState({
-  //     title: this.props.currentPost.title,
-  //     tags: this.props.pcurrentPostost.tags,
-  //     content: this.props.currentPost.content,
-  //     author: this.props.currentPost.author,
-  //   });
-  // }
 
   onTitleChange(event) {
     this.setState({ title: event.target.value });
-    console.log(this.state.title);
+    // console.log(this.state.title);
   }
 
   onTagsChange(event) {
@@ -61,7 +51,7 @@ class Show extends Component {
 
   onContentChange(event) {
     this.setState({ content: event.target.value });
-    console.log(this.state.content);
+    // console.log(this.state.content);
   }
 
   onDeleteClick() {
@@ -94,7 +84,7 @@ class Show extends Component {
   changeContent(event) {
     if (this.state.editing) {
       this.props.updatePost(this.props.params.id, this.state.title, this.state.tags, this.state.content);
-      console.log('updating post');
+      // console.log('updating post');
       // this.props.fetchpost(this.props.params.id);
     } else {
       this.setState({
